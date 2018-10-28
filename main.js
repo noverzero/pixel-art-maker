@@ -3,10 +3,14 @@ document.addEventListener("DOMContentLoaded", function(){ console.log("developed
 let canvas = document.querySelector("#canvas")
 console.log(canvas)
 
-
+//globally declare initial canvasSize
+let CanvasSize = 100
 
 //globally declare selected color variable
 let selectedColor = "black"
+
+//globally set default color for content text
+let chicken = document.getElementById("chicken")
 
 //globablly set default background color to match selected color
 let header = document.getElementById("headerRow")
@@ -16,6 +20,21 @@ header.style.backgroundColor = selectedColor
 let mainContainer = document.getElementById("main-container")
 mainContainer.style.border= "solid .001rem"
 mainContainer.style.borderColor = selectedColor
+
+//Create Control Panel
+
+
+
+
+// let controlRow = document.createElement("div")
+// controlRow.setAttribute("class" , "row mx-auto")
+// for(let i = 0; i <3; i++){
+//   let controlColumn = document.createElement("div")
+//   controlColumn.setAttribute("class" , "col-4 mx-auto d-flex justify-contents-center")
+//   controlRow.appendChild(controlColumn)
+//   mainContainer.appendChild(controlRow)
+// }
+
 
 // Create palatte
 let palatte = document.getElementById("palatte")
@@ -28,36 +47,86 @@ let palatte = document.getElementById("palatte")
     swatch.style.marginBottom = "10px"
     swatch.style.float = "left"
     swatch.style.backgroundColor = randomHexCode()
-    swatch.style.border = "solid gray .001rem"
+    swatch.style.border = "solid gray .01rem"
     palatte.appendChild(swatch)
     swatch.addEventListener("click", function(){
     console.log(event)
     selectedColor = swatch.style.backgroundColor
     header.style.backgroundColor = selectedColor
     mainContainer.style.borderColor = selectedColor
+    chicken.style.color = selectedColor
+    currentColor.style.backgroundColor = selectedColor
+
 
  })
 }
+//create eraser
+let eraser = document.getElementById("eraser")
+let eraserColor = document.createElement("button")
+eraserColor.style.width = "50px"
+eraserColor.style.paddingBottom="10px"
+eraserColor.style.backgroundColor = "coral"
+eraserColor.style.border = "solid gray .01rem"
+eraser.appendChild(eraserColor)
+eraserColor.addEventListener("click", function(){
+console.log(event)
+selectedColor = "white"
+header.style.backgroundColor = "coral"
+mainContainer.style.borderColor = "coral"
+chicken.style.color = "coral"
+currentColor.style.backgroundColor = "white"
+
+})
+
+//create currentColor
+let colorDiv = document.getElementById("colorDiv")
+let currentColor = document.createElement("button")
+currentColor.style.width = "50%px"
+currentColor.style.paddingBottom="10px"
+currentColor.style.backgroundColor = selectedColor
+currentColor.style.border = "solid gray .01rem"
+colorDiv.appendChild(currentColor)
+
 
 // Create canvas
-    for (let i = 1; i < 5000 ; i++){
+let canvasSize = document.querySelector("#canvasSize")
+canvasSize.addEventListener("input" , function(){
+  console.log("canvasSize.Value:::" , canvasSize.value)
 
-      let tile = document.createElement("div")
-      console.log(tile)
-      tile.style.width = "10px"
-      console.log(tile)
-      tile.style.paddingBottom = "10px"
-      console.log(tile)
-      tile.style.float = "left"
-      tile.style.backgroundColor = "white"
-      tile.style.border= "solid .001rem"
-      tile.style.borderColor = "gray"
-      canvas.appendChild(tile)
-      console.log(tile)
-      tile.addEventListener("click" , function(){
-      tile.style.backgroundColor = selectedColor
-      })
+//console.log("dimensions outside::::" , dimensions)
+
+
+function buildCanvas(dimensions){
+  let rows = dimensions
+  let columns = dimensions
+
+    for (let i = 1; i <= rows ; i++){
+    let canvasRow = document.createElement("div")
+    canvasRow.setAttribute("class" , "row mx-auto")
+    canvasRow.id=`row${i}`
+      for (let j = 1; j <= columns ; j++){
+        let tile = document.createElement("div")
+        let currentRow = canvasRow[i]
+        console.log(tile)
+        tile.style.width = "1%"
+        console.log(tile)
+        tile.style.paddingBottom = "1%"
+        console.log(tile)
+        tile.style.float = "left"
+        tile.style.backgroundColor = "white"
+        tile.style.border= "solid .01rem"
+        tile.style.borderColor = "gray"
+        canvas.appendChild(canvasRow)
+        canvasRow.appendChild(tile)
+        console.log(tile)
+        tile.addEventListener("click" , function(){
+        tile.style.backgroundColor = selectedColor
+        })
   }
+}
+}
+buildCanvas(canvasSize.value)
+})
 //Change Header bagckground color based on selectedColor
 
 
