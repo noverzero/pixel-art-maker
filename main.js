@@ -108,9 +108,9 @@ function buildCanvas(dimensions){
         let tile = document.createElement("div")
         let currentRow = canvasRow[i]
         console.log(tile)
-        tile.style.width = "1%"
+        tile.style.width = `${100/dimensions}%`
         console.log(tile)
-        tile.style.paddingBottom = "1%"
+        tile.style.paddingBottom = `${100/dimensions}%`
         console.log(tile)
         tile.style.float = "left"
         tile.style.backgroundColor = "white"
