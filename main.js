@@ -3,9 +3,6 @@ document.addEventListener("DOMContentLoaded", function(){ console.log("developed
 let canvas = document.querySelector("#canvas")
 console.log(canvas)
 
-//globally declare initial canvasSize
-let CanvasSize = 100
-
 //globally declare selected color variable
 let selectedColor = "black"
 
@@ -20,21 +17,6 @@ header.style.backgroundColor = selectedColor
 let mainContainer = document.getElementById("main-container")
 mainContainer.style.border= "solid .001rem"
 mainContainer.style.borderColor = selectedColor
-
-//Create Control Panel
-
-
-
-
-// let controlRow = document.createElement("div")
-// controlRow.setAttribute("class" , "row mx-auto")
-// for(let i = 0; i <3; i++){
-//   let controlColumn = document.createElement("div")
-//   controlColumn.setAttribute("class" , "col-4 mx-auto d-flex justify-contents-center")
-//   controlRow.appendChild(controlColumn)
-//   mainContainer.appendChild(controlRow)
-// }
-
 
 // Create palatte
 let palatte = document.getElementById("palatte")
@@ -52,12 +34,11 @@ let palatte = document.getElementById("palatte")
     swatch.addEventListener("click", function(){
     console.log(event)
     selectedColor = swatch.style.backgroundColor
+    //Change Header bagckground color based on selectedColor
     header.style.backgroundColor = selectedColor
     mainContainer.style.borderColor = selectedColor
     chicken.style.color = selectedColor
     currentColor.style.backgroundColor = selectedColor
-
-
  })
 }
 //create eraser
@@ -66,7 +47,7 @@ let eraserColor = document.createElement("button")
 eraserColor.style.width = "50px"
 eraserColor.style.paddingBottom="10px"
 eraserColor.style.backgroundColor = "coral"
-eraserColor.style.border = "solid gray .01rem"
+eraserColor.style.border = "solid gray .01em"
 eraser.appendChild(eraserColor)
 eraserColor.addEventListener("click", function(){
 console.log(event)
@@ -84,11 +65,12 @@ let currentColor = document.createElement("button")
 currentColor.style.width = "50%px"
 currentColor.style.paddingBottom="10px"
 currentColor.style.backgroundColor = selectedColor
-currentColor.style.border = "solid gray .01rem"
+currentColor.style.border = "solid gray .01em"
 colorDiv.appendChild(currentColor)
 
 
-// Create canvas
+// Set CanvasSize
+
 let canvasSize = document.querySelector("#canvasSize")
 canvasSize.addEventListener("input" , function(){
   console.log("canvasSize.Value:::" , canvasSize.value)
@@ -97,37 +79,39 @@ canvasSize.addEventListener("input" , function(){
 
 
 function buildCanvas(dimensions){
+
   let rows = dimensions
   let columns = dimensions
 
     for (let i = 1; i <= rows ; i++){
     let canvasRow = document.createElement("div")
-    canvasRow.setAttribute("class" , "row mx-auto")
+    canvasRow.setAttribute("class" , "row mx-auto delete")
     canvasRow.id=`row${i}`
       for (let j = 1; j <= columns ; j++){
         let tile = document.createElement("div")
-        let currentRow = canvasRow[i]
-        console.log(tile)
         tile.style.width = `${100/dimensions}%`
-        console.log(tile)
         tile.style.paddingBottom = `${100/dimensions}%`
-        console.log(tile)
         tile.style.float = "left"
         tile.style.backgroundColor = "white"
-        tile.style.border= "solid .01rem"
-        tile.style.borderColor = "gray"
+        tile.style.border= "solid .01em"
+        tile.style.borderColor = "gainsboro"
         canvas.appendChild(canvasRow)
         canvasRow.appendChild(tile)
-        console.log(tile)
-        tile.addEventListener("click" , function(){
-        tile.style.backgroundColor = selectedColor
-        })
   }
 }
 }
+
+
+//
 buildCanvas(canvasSize.value)
-})
-//Change Header bagckground color based on selectedColor
+ })
+
+
+
+//Paint Feature!!!
+  canvas.addEventListener("click" , function(){
+  event.target.style.backgroundColor = selectedColor
+  })
 
 
 //Random Color Palatte Generator
@@ -143,13 +127,16 @@ function randomHexCode() {
 randomHexCode()
 
 
-//picking up a color
-//add listening event to button divs
-//if button clicked, selectedColor = clicked color
+//Create Control Panel
 
-
-//if clicked change background color of event.target to selected color
-
+// let controlRow = document.createElement("div")
+// controlRow.setAttribute("class" , "row mx-auto")
+// for(let i = 0; i <3; i++){
+//   let controlColumn = document.createElement("div")
+//   controlColumn.setAttribute("class" , "col-4 mx-auto d-flex justify-contents-center")
+//   controlRow.appendChild(controlColumn)
+//   mainContainer.appendChild(controlRow)
+// }
 
 
 
