@@ -52,9 +52,9 @@ eraser.appendChild(eraserColor)
 eraserColor.addEventListener("click", function(){
 console.log(event)
 selectedColor = "white"
-header.style.backgroundColor = "coral"
-mainContainer.style.borderColor = "coral"
-chicken.style.color = "coral"
+header.style.backgroundColor = "pink"
+mainContainer.style.borderColor = "pink"
+chicken.style.color = "pink"
 currentColor.style.backgroundColor = "white"
 
 })
@@ -62,7 +62,7 @@ currentColor.style.backgroundColor = "white"
 //create currentColor
 let colorDiv = document.getElementById("colorDiv")
 let currentColor = document.createElement("button")
-currentColor.style.width = "50%px"
+currentColor.style.width = "50px"
 currentColor.style.paddingBottom="10px"
 currentColor.style.backgroundColor = selectedColor
 currentColor.style.border = "solid gray .01em"
@@ -79,6 +79,9 @@ canvasSize.addEventListener("input" , function(){
 
 
 function buildCanvas(dimensions){
+  while (canvas.firstChild) {
+    canvas.removeChild(canvas.firstChild)
+  }
 
   let rows = dimensions
   let columns = dimensions
