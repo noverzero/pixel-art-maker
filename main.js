@@ -113,7 +113,11 @@ buildCanvas(canvasSize.value)
 
 //Paint Feature!!!
   canvas.addEventListener("click" , function(){
-  event.target.style.backgroundColor = selectedColor
+    if(event.target === canvas){
+      return
+    } else {
+    event.target.style.backgroundColor = selectedColor
+      }
   })
 
 
